@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getApiUrl } from '../utils/api';
+import { getApiBaseUrl } from '../utils/api';
 
 export default function Activities() {
   const [items, setItems] = useState([]);
@@ -9,7 +9,7 @@ export default function Activities() {
   useEffect(() => {
     async function load() {
       try {
-        const response = await fetch(getApiUrl('activities'));
+        const response = await fetch(`${getApiBaseUrl()}/api/activities/`);
         const payload = await response.json();
         const data = Array.isArray(payload) ? payload : payload.data ?? [];
         setItems(data);
